@@ -1,4 +1,5 @@
-# Loja Virtual - Projeto de E-commerce## 📌 Descrição
+# Loja Virtual - Projeto de E-commerce 
+## 📌 Descrição
 Este é um projeto simples de loja virtual desenvolvido para fins acadêmicos na disciplina de Banco de Dados, durante o 2º semestre do curso de Análise e Desenvolvimento de Sistemas.
 
 A loja oferece produtos como acessórios, eletrônicos e roupas, com funcionalidades básicas de cadastro, login, visualização de produtos e carrinho de compras.
@@ -21,3 +22,6 @@ A loja oferece produtos como acessórios, eletrônicos e roupas, com funcionalid
 - Estrutura de banco de dados relacional
 
 ---
+
+## 📕 Informações adicionais
+Esse projeto pode ser usado como fonte de aprendizado e para uso pessoal
