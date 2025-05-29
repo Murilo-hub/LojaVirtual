@@ -7,7 +7,8 @@ CREATE TABLE clientes(
     nome VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     telefone VARCHAR(20),
-    endereco TEXT NOT NULL
+    endereco TEXT NOT NULL,
+    senha VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE produtos(
@@ -17,6 +18,7 @@ CREATE TABLE produtos(
     preco DECIMAL(10,2) NOT NULL CHECK (preco >= 0),
     quantidade_estoque INT NOT NULL CHECK (quantidade_estoque >= 0),
     categoria_id INT NOT NULL,
+    imagem VARCHAR(255),
     FOREIGN KEY (categoria_id) REFERENCES categorias(id)
 );
 
@@ -70,8 +72,9 @@ CREATE TABLE carrinhos(
     cliente_id INT NOT NULL,
     produto_id INT NOT NULL,
     data_criacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (cliente_id) REFERENCES clientes(id),
-    FOREIGN KEY (produto_id) REFERENCES produtos(id)
+    quantidade INT NOT NULL DEFAULT 1,
+	FOREIGN KEY (produto_id) REFERENCES produtos(id),
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
 );
 
 CREATE TABLE itens_carrinho(
@@ -91,34 +94,22 @@ CREATE TABLE usuarios_admin(
     perfil ENUM('Administrador', 'Estoquista', 'Analista') NOT NULL
 );
 
-INSERT INTO usuarios_admin (nome, email, senha_hash, perfil)
-VALUES ('Administrador G2','admin2@emix.com','$2y$10$HyvfenX4qM9xKG19sMCmretPx2MpBgRwgQgGvmUwCCq4IhztxR7M6','Administrador');
-
-INSERT INTO categorias (nome)
-VALUES ('Eletronicos');
-
-ALTER TABLE clientes
-ADD COLUMN senha VARCHAR(255) NOT NULL;
+INSERT INTO usuarios_admin(nome, email, senha_hash, perfil)
+VALUES ('Administrador Geral', 'admin@emix.com', '$2y$10$HmDJJ0QuXmMQIifjao40i.JXT3yzgzn3rdeoFUgLwm0G9lj1HijLy', 'Administrador');
 
 SELECT * FROM clientes;
 SELECT * FROM usuarios_admin;
 SELECT * FROM categorias;
 SELECT * FROM produtos;
 SELECT * FROM carrinhos;
-SELECT * FROM itens_carrinho;
-SELECT * FROM pedidos;
-
-DELETE FROM carrinhos WHERE id='1';
 
 INSERT INTO categorias(nome)
-VALUES ('Acessórios');
+VALUES ('Roupas');
 
-DELETE FROM clientes WHERE id='1';
+INSERT INTO categorias(nome)
+VALUES ('Acessorios');
 
-ALTER TABLE produtos
-ADD COLUMN imagem VARCHAR(255);
+INSERT INTO categorias(nome)
+VALUES ('Eletronicos');
 
-DROP TABLE carrinhos;
-
-ALTER TABLE carrinhos
-ADD COLUMN quantidade INT NOT NULL DEFAULT 1;
+DROP DATABASE emix;
